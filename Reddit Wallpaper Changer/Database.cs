@@ -6,16 +6,22 @@ using System.Xml;
 using System.Net;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Threading.Tasks;
 using System.Reflection;
-using Reddit_Wallpaper_Changer.Model;
-using Reddit_Wallpaper_Changer.Log;
 
 namespace Reddit_Wallpaper_Changer
 {
-    public class Database
+    class Database
     {
         SQLiteConnection m_dbConnection;
         string dbPath = Properties.Settings.Default.AppDataPath + @"\Reddit-Wallpaper-Changer.sqlite";
+
+        public string imgstring { get; set; }
+        public string titlestring { get; set; }
+        public string threadidstring { get; set; }
+        public string urlstring { get; set; }
+        public string datestring { get; set; }
+
 
         //======================================================================
         // Create the SQLite Blacklist database
@@ -182,7 +188,7 @@ namespace Reddit_Wallpaper_Changer
         //======================================================================
         // Add wallpaper to blacklisted
         //======================================================================
-        public bool blacklistWallpaper(string url, string title, string threadid)
+        public async Task<bool> blacklistWallpaper(string url, string title, string threadid)
         {
             try
             {
@@ -211,7 +217,7 @@ namespace Reddit_Wallpaper_Changer
         //======================================================================
         // Add wallpaper to favourites
         //======================================================================
-        public bool faveWallpaper(string url, string title, string threadid)
+        public async Task<bool> faveWallpaper(string url, string title, string threadid)
         {
             try
             {
@@ -262,7 +268,7 @@ namespace Reddit_Wallpaper_Changer
         //======================================================================
         // Add wallpaper to history
         //======================================================================
-        public void AddWallpaperToHistory(string url, string title, string threadid)
+        public void historyWallpaper(string url, string title, string threadid)
         {
             try
             {
@@ -278,10 +284,13 @@ namespace Reddit_Wallpaper_Changer
                     command.Parameters.AddWithValue("dateTime", dateTime);
                     command.ExecuteNonQuery();
                 }
+
+                //return true;
             }
             catch (Exception ex)
             {
                 Logging.LogMessageToFile("Unexpected error adding wallpaper to history: " + ex.Message, 1);
+                //return false;
             }
         }
 
@@ -349,18 +358,18 @@ namespace Reddit_Wallpaper_Changer
         //======================================================================
         // Retrieve history from the database
         //======================================================================
-        public List<HistoryItem> getFromHistory()
+        public List<Database> getFromHistory()
         {
             try
             {
-                var items = new List<HistoryItem>();
+                List<Database> items = new List<Database>();
                 string sql = "SELECT * FROM history ORDER BY datetime(date) DESC";
                 SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var item = new HistoryItem();
+                        var item = new Database();
                         item.imgstring = (string)reader["thumbnail"];
                         item.titlestring = (string)reader["title"];
                         item.threadidstring = (string)reader["threadid"];
@@ -383,18 +392,18 @@ namespace Reddit_Wallpaper_Changer
         //======================================================================
         // Retrieve blacklist from the database
         //======================================================================
-        public List<HistoryItem> getFromBlacklist()
+        public List<Database> getFromBlacklist()
         {
             try
             {
-                List<HistoryItem> items = new List<HistoryItem>();
+                List<Database> items = new List<Database>();
                 string sql = "SELECT * FROM blacklist ORDER BY datetime(date) DESC";
                 SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var item = new HistoryItem();
+                        var item = new Database();
                         item.imgstring = (string)reader["thumbnail"];
                         item.titlestring = (string)reader["title"];
                         item.threadidstring = (string)reader["threadid"];
@@ -417,18 +426,18 @@ namespace Reddit_Wallpaper_Changer
         //======================================================================
         // Retrieve favourites from the database
         //======================================================================
-        public List<HistoryItem> getFromFavourites()
+        public List<Database> getFromFavourites()
         {
             try
             {
-                var items = new List<HistoryItem>();
+                List<Database> items = new List<Database>();
                 string sql = "SELECT * FROM favourites ORDER BY datetime(date) DESC";
                 SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var item = new HistoryItem();
+                        var item = new Database();
                         item.imgstring = (string)reader["thumbnail"];
                         item.titlestring = (string)reader["title"];
                         item.threadidstring = (string)reader["threadid"];
@@ -481,28 +490,32 @@ namespace Reddit_Wallpaper_Changer
         //======================================================================
         // Check for blacklisted wallpaper
         //======================================================================
-        public bool IsBlackListed(string url)
+        public bool checkForEntry(string url)
         {
             try
             {
+                string tmp = "";
                 string sql = "SELECT url FROM blacklist WHERE url = \"" + url + "\"";
                 SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
                 SQLiteDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    string tmp = reader["url"].ToString();
-                    if (!string.IsNullOrEmpty(tmp))
-                    {
-                        return true;
-                    }
+                    tmp = reader["url"].ToString();
+                }
+                if (tmp == "")
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
                 }
             }
             catch(Exception ex)
             {
                 Logging.LogMessageToFile("Unexpected error checking for Blacklist entry: " + ex.Message, 1);
+                return false;
             }
-
-            return false;
         }
 
         //======================================================================
@@ -648,12 +661,13 @@ namespace Reddit_Wallpaper_Changer
         }
 
         //======================================================================
-        // Close database connection
+        // Close database conenction
         //======================================================================
         public void disconnectFromDatabase()
         {
             m_dbConnection.Close();
         }
+
     }
 }
 

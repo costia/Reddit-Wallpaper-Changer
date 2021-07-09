@@ -38,13 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\rwc.ico</ApplicationIcon>
@@ -53,12 +54,61 @@
     <OutputPath>bin\Remote\</OutputPath>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|x86'">
+    <OutputPath>bin\x86\Remote\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|x64'">
+    <OutputPath>bin\x64\Remote\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Resources\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector, Version=4.7.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.4.7.1\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,26 +128,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
-    <Compile Include="Log\Logging.cs" />
-    <Compile Include="Model\ChangeWallpaperResult.cs" />
-    <Compile Include="Model\HistoryItem.cs" />
-    <Compile Include="Model\ImageInfo.cs" />
+    <Compile Include="Logging.cs" />
     <Compile Include="Pastebin.cs" />
-    <Compile Include="Settings\ILoadSettings.cs" />
-    <Compile Include="Settings\ISearchSettings.cs" />
-    <Compile Include="Settings\SettingsProvider.cs" />
-    <Compile Include="View\PopupInfo.cs">
+    <Compile Include="PopupInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PopupInfo.Designer.cs">
+    <Compile Include="PopupInfo.Designer.cs">
       <DependentUpon>PopupInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Proxy.cs" />
     <Compile Include="Quotes.cs" />
-    <Compile Include="View\RWC.cs">
+    <Compile Include="RWC.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\RWC.Designer.cs">
+    <Compile Include="RWC.Designer.cs">
       <DependentUpon>RWC.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -105,70 +149,51 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Settings\ManageSettings.cs" />
-    <Compile Include="Wallpaper\ICurrentWallpaperHolder.cs" />
-    <Compile Include="Wallpaper\IImageUrlValidator.cs" />
-    <Compile Include="Wallpaper\Impl\CurrentWallpaperHolder.cs" />
-    <Compile Include="Wallpaper\Impl\WallpaperSaver.cs" />
-    <Compile Include="Log\SuperSecret.cs" />
-    <Compile Include="View\Update.cs">
+    <Compile Include="ManageSettings.cs" />
+    <Compile Include="SaveWallpaper.cs" />
+    <Compile Include="SuperSecret.cs" />
+    <Compile Include="Update.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Update.Designer.cs">
+    <Compile Include="Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\SearchWizard.cs">
+    <Compile Include="SearchWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SearchWizard.Designer.cs">
+    <Compile Include="SearchWizard.Designer.cs">
       <DependentUpon>SearchWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wallpaper\Impl\ActiveDesktop.cs" />
-    <Compile Include="Wallpaper\Impl\ImageUrlValidator.cs" />
-    <Compile Include="View\WallpaperTypes.cs">
+    <Compile Include="ActiveDesktop.cs" />
+    <Compile Include="Validation.cs" />
+    <Compile Include="WallpaperTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\WallpaperTypes.Designer.cs">
+    <Compile Include="WallpaperTypes.Designer.cs">
       <DependentUpon>WallpaperTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wallpaper\IImageInfoProvider.cs" />
-    <Compile Include="Wallpaper\IImageLoader.cs" />
-    <Compile Include="Wallpaper\Impl\ImageInfoProvider.cs" />
-    <Compile Include="Wallpaper\Impl\ImageLoader.cs" />
-    <Compile Include="Wallpaper\Impl\SearchUrlProvider.cs" />
-    <Compile Include="Wallpaper\Impl\WallpaperSetter.cs" />
-    <Compile Include="Wallpaper\IWallpaperSaver.cs" />
-    <Compile Include="Wallpaper\ISearchUrlProvider.cs" />
-    <Compile Include="Wallpaper\Impl\ThumbnailCacheBuilder.cs" />
-    <Compile Include="Wallpaper\Impl\WallpaperChanger.cs" />
-    <Compile Include="Wallpaper\Impl\WinApiProvider.cs" />
-    <Compile Include="Wallpaper\IThumbnailCacheBuilder.cs" />
-    <Compile Include="Wallpaper\IWallpaperChanger.cs" />
-    <Compile Include="Wallpaper\IWallpaperSetter.cs" />
-    <EmbeddedResource Include="View\PopupInfo.resx">
+    <EmbeddedResource Include="PopupInfo.resx">
       <DependentUpon>PopupInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\RWC.resx">
+    <EmbeddedResource Include="RWC.resx">
       <DependentUpon>RWC.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SearchWizard.resx">
+    <EmbeddedResource Include="SearchWizard.resx">
       <DependentUpon>SearchWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Update.resx">
+    <EmbeddedResource Include="Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\WallpaperTypes.resx">
+    <EmbeddedResource Include="WallpaperTypes.resx">
       <DependentUpon>WallpaperTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

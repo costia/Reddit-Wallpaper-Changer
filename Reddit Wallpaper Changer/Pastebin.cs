@@ -1,6 +1,5 @@
-﻿using Reddit_Wallpaper_Changer.Log;
-using System;
-using System.Collections.Specialized;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -15,24 +14,22 @@ namespace Reddit_Wallpaper_Changer
             Properties.Settings.Default.logUrl = "";
             Properties.Settings.Default.Save();
 
-            NameValueCollection Data = new NameValueCollection
-            {
-                ["api_paste_name"] = "RWC_Log_" + DateTime.Now.ToString() + ".log",
-                ["api_paste_expire_Date"] = "N",
-                ["api_paste_code"] = File.ReadAllText(Properties.Settings.Default.AppDataPath + @"\Logs\RWC.log"),
-                ["api_dev_key"] = "017c00e3a11ee8c70499c1f4b6b933f0",
-                ["api_option"] = "paste"
-            };
+            System.Collections.Specialized.NameValueCollection Data = new System.Collections.Specialized.NameValueCollection();
+            Data["api_paste_name"] = "RWC_Log_" + DateTime.Now.ToString() + ".log";
+            Data["api_paste_expire_Date"] = "N";
+            Data["api_paste_code"] = File.ReadAllText(Properties.Settings.Default.AppDataPath + @"\Logs\RWC.log");
+            Data["api_dev_key"] = "017c00e3a11ee8c70499c1f4b6b933f0";
+            Data["api_option"] = "paste";
 
             using (WebClient wc = Proxy.setProxy())
             {
                 try
                 {
-                    byte[] bytes =  await wc.UploadValuesTaskAsync("http://pastebin.com/api/api_post.php", Data);
+                    byte[] bytes = wc.UploadValues("http://pastebin.com/api/api_post.php", Data);
                     string response;
                     using (MemoryStream ms = new MemoryStream(bytes))
                     using (StreamReader reader = new StreamReader(ms))
-                        response = await reader.ReadToEndAsync();
+                        response = reader.ReadToEnd();
 
                     if (response.StartsWith("Bad API request"))
                     {

@@ -110,3 +110,21 @@ S:\Dropbox\C# Projects\Reddit-Wallpaper-Changer\Reddit-Wallpaper-Changer\Reddit 
 S:\Dropbox\C# Projects\Reddit-Wallpaper-Changer\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit_Wallpaper_Changer.WallpaperTypes.resources
 S:\Dropbox\C# Projects\Reddit-Wallpaper-Changer\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.csproj.GenerateResource.Cache
 S:\Dropbox\C# Projects\Reddit-Wallpaper-Changer\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.pdb
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\bin\Debug\Reddit Wallpaper Changer.exe.config
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\bin\Debug\Reddit Wallpaper Changer.exe
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\bin\Debug\Reddit Wallpaper Changer.pdb
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\bin\Debug\System.Data.SQLite.dll
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\bin\Debug\System.Data.SQLite.xml
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.csprojAssemblyReference.cache
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit_Wallpaper_Changer.PopupInfo.resources
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit_Wallpaper_Changer.RWC.resources
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit_Wallpaper_Changer.Properties.Resources.resources
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit_Wallpaper_Changer.SearchWizard.resources
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit_Wallpaper_Changer.Update.resources
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit_Wallpaper_Changer.WallpaperTypes.resources
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.csproj.GenerateResource.cache
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.csproj.CoreCompileInputs.cache
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.csproj.CopyComplete
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.exe
+C:\Users\Costia\Source\Repos\Reddit-Wallpaper-Changer\Reddit Wallpaper Changer\obj\Debug\Reddit Wallpaper Changer.pdb
